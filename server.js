@@ -1,18 +1,19 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
+
+const userRouter = require("./routes/user");
+
+// app.use(express.static("public"))
+app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    // res.send('Hello World!')
+    res.render("index", { text: "Node.jsとexpress" });
 })
 
-app.get('/user', (req, res) => {
-    res.send('ユーザーです。')
-})
-
-app.get('/user/info', (req, res) => {
-    res.send('ユーザー情報です。')
-})
+//ルーティング
+app.use("/user", userRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
